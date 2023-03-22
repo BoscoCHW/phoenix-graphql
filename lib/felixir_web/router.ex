@@ -5,8 +5,15 @@ defmodule FelixirWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", FelixirWeb do
+  scope "/api" do
     pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: FelixirWeb.Schema
+
+    forward "/", Absinthe.Plug,
+      schema: FelixirWeb.Schema
+
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
