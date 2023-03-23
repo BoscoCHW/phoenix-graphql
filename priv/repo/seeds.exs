@@ -16,7 +16,8 @@ alias Felixir.Repo
 
 user =
   %User{}
-  |> User.changeset(%{username: "Test", password: "test"})
+  |> User.changeset(%{username: "Test", password: "test", token: "test_token"})
   |> Repo.insert!
 
-Content.create_post(user, %{title: "Test Post", body: "Lorem Ipsum", published_at: ~N[2017-10-26 10:00:00]})
+Content.create_post(user, %{title: "Test Post 1", body: "Lorem Ipsum", published_at: ~N[2017-10-26 10:00:00]})
+Content.create_post(user, %{title: "Test Post 2", body: "Lorem Ipsum Lorem Ipsum", published_at: ~N[2017-10-27 10:00:00]})

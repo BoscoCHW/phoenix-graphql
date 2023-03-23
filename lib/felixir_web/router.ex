@@ -5,8 +5,12 @@ defmodule FelixirWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :graphql do
+    plug Felixir.Context
+  end
+
   scope "/api" do
-    pipe_through :api
+    pipe_through :graphql
 
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: FelixirWeb.Schema

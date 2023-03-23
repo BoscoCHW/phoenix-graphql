@@ -5,7 +5,7 @@ defmodule Felixir.Content.Post do
   schema "posts" do
     field :body, :string
     field :title, :string
-    field :published_at, :naive_datetime
+    field :published_at, :naive_datetime, default: (NaiveDateTime.truncate NaiveDateTime.utc_now, :second)
     belongs_to :user, Felixir.Account.User
     timestamps()
   end

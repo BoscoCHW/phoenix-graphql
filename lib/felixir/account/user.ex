@@ -5,7 +5,7 @@ defmodule Felixir.Account.User do
   schema "users" do
     field :password, :string
     field :username, :string
-
+    field :token, :string
     has_many :posts, Felixir.Content.Post
     timestamps()
   end
@@ -13,7 +13,7 @@ defmodule Felixir.Account.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :password])
+    |> cast(attrs, [:username, :password, :token])
     |> validate_required([:username, :password])
     |> unique_constraint(:username)
   end
