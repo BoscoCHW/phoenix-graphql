@@ -5,17 +5,16 @@ defmodule FelixirWeb.Schema do
   import_types FelixirWeb.Schema.ContentTypes
   alias FelixirWeb.Resolvers
 
-  alias Felixir.Account
+  # def context(ctx) do
+  #   loader =
+  #     Dataloader.new()
+  #     |> Dataloader.add_source(Felixir.Account, Felixir.Account.datasource())
+  #     # |> Dataloader.add_source(Felixir.Content, Felixir.Content.datasource())
 
-  def context(ctx) do
-    loader =
-      Dataloader.new()
-      |> Dataloader.add_source(Account, Account.datasource())
+  #   Map.put(ctx, :loader, loader)
+  # end
 
-    Map.put(ctx, :loader, loader)
-  end
-
-  def plugins, do: [Absinthe.Middleware.Dataloader | Absinthe.Plugin.defaults()]
+  # def plugins, do: [Absinthe.Middleware.Dataloader | Absinthe.Plugin.defaults()]
 
   query do
 
@@ -24,34 +23,12 @@ defmodule FelixirWeb.Schema do
       resolve &Resolvers.Content.list_posts/3
     end
 
-    @desc "Get a user of the blog"
-    field :user, :user do
-      arg :id, non_null(:id)
-      resolve &Resolvers.Accounts.find_user/3
-    end
+    # @desc "Get a user of the blog"
+    # field :user, :user do
+    #   arg :id, non_null(:id)
+    #   resolve &Resolvers.Accounts.find_user/3
+    # end
   end
 
-  mutation do
-
-    @desc "Create a post"
-    field :create_post, type: :post do
-      arg :title, non_null(:string)
-      arg :body, non_null(:string)
-      arg :published_at, :naive_datetime
-
-      resolve &Resolvers.Content.create_post/3
-    end
-
-    @desc "Create a user"
-    field :create_user, :user do
-      arg :username, non_null(:string)
-      arg :contact, non_null(:contact_input)
-      arg :password, non_null(:string)
-      arg :token, non_null(:string)
-
-      resolve &Resolvers.Accounts.create_user/3
-    end
-
-  end
 
 end

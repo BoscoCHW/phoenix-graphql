@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :felixir, Felixir.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "world",
+  password: "world",
   hostname: "localhost",
-  database: "felixir_dev",
+  database: "world-db",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

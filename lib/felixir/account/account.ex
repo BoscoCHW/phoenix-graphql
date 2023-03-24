@@ -8,17 +8,10 @@ defmodule Felixir.Account do
 
   alias Felixir.Account.User
 
-  def datasource() do
-    Dataloader.Ecto.new(Repo, query: &query/2)
-  end
+  # def datasource() do
+  #   Dataloader.Ecto.new(Repo)
+  # end
 
-  defp query(User, %{scope: :post}) do
-    User
-  end
-
-  defp query(model, _) do
-    model
-  end
 
   @doc """
   Returns the list of users.

@@ -6,7 +6,9 @@ defmodule Felixir.Content do
   import Ecto.Query, warn: false
   alias Felixir.{Repo, Content}
 
-
+  # def datasource() do
+  #   Dataloader.Ecto.new(Repo)
+  # end
   @doc """
   Gets a single post.
 
