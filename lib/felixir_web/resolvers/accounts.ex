@@ -9,4 +9,12 @@ defmodule FelixirWeb.Resolvers.Accounts do
     end
   end
 
+  def create_user(_parent, args, _resolution) do
+    Felixir.Account.create_user(args)
+  end
+
+  def list_contacts(%Felixir.Account.User{} = user, _args, _resolution) do
+    {:ok, Felixir.Account.list_contacts(user)}
+  end
+
 end

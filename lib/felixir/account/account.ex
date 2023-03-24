@@ -50,9 +50,28 @@ defmodule Felixir.Account do
 
   """
   def create_user(attrs \\ %{}) do
-    %User{}
+    result = %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
+    case result do
+      {:ok, user} ->
+        create_contact(user, attrs.contact)
+        {:ok,user}
+      {:error, changeset} -> {:error, changeset}
+    end
+
+
+  end
+
+  def create_contact(user, attrs \\ %{}) do
+    user
+      |> Ecto.build_assoc(:contacts, attrs)
+      |> Repo.insert()
+  end
+
+  def list_contacts(user) do
+    from(t in Felixir.Account.Contact, where: t.user_id == ^user.id)
+    |> Repo.all
   end
 
   @doc """

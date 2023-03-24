@@ -7,6 +7,7 @@ defmodule Felixir.Account.User do
     field :username, :string
     field :token, :string
     has_many :posts, Felixir.Content.Post
+    has_many :contacts, Felixir.Account.Contact
     timestamps()
   end
 
