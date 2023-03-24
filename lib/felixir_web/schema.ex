@@ -5,6 +5,18 @@ defmodule FelixirWeb.Schema do
   import_types FelixirWeb.Schema.ContentTypes
   alias FelixirWeb.Resolvers
 
+  alias Felixir.Account
+
+  def context(ctx) do
+    loader =
+      Dataloader.new()
+      |> Dataloader.add_source(Account, Account.datasource())
+
+    Map.put(ctx, :loader, loader)
+  end
+
+  def plugins, do: [Absinthe.Middleware.Dataloader | Absinthe.Plugin.defaults()]
+
   query do
 
     @desc "Get all posts"
